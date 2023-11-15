@@ -12,6 +12,8 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@tanstack/react-query": "^5.8.3",
+    "axios": "^1.6.2",
     "eslint-config-prettier": "^9.0.0",
     "prettier": "^3.1.0",
     "react": "^18.2.0",
@@ -34,13 +36,9 @@
     "vite": "^4.4.5"
   },
   "lint-staged": {
-
     "**/*.{js,jsx,ts,tsx}": [
       "npx prettier --write",
       "npx eslint --fix"
     ]
   }
-
-    
-  
 }
