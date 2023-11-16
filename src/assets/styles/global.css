@@ -18,13 +18,14 @@
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
+  font-size: 1.2rem;
 }
 
 
 body {
   margin: 0;
   display: flex;
-  place-items: center;
+  flex-direction: column;
   min-width: 320px;
   min-height: 100vh;
 }
