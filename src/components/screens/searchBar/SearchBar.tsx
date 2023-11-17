@@ -1,67 +1,57 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
 import Header from '../../ui/Header.js';
 import { AxiosApi } from '../../../api/Axios.api.tsx';
 import Main from '../../ui/Main.tsx';
+import { FC } from 'react';
 
-class SearchBar extends React.Component {
-  saveValue = localStorage.getItem('searchValue');
+const SearchBar: FC = () => {
+  const searchValue = localStorage.getItem('searchValue');
+  const [isLoading, setIsLoading] = useState(true);
+  const [value, setValue] = useState(searchValue || '');
+  const [data, setData] = useState([]);
 
-  state = {
-    data: [],
-    loading: true,
-    searchValue: this.saveValue || '',
-  };
+  useEffect(() => {
+    const resData = responseAxios(value);
+    setData(resData.results);
+  }, []);
 
-  errorMessage() {
+  const errorMessage = () => {
     console.log(`Error button`);
     throw new Error('Error message');
-  }
-
-  handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({ searchValue: e.target.value });
   };
 
-  handleSubmit = (e: React.FormEvent) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value);
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    localStorage.setItem('searchValue', this.state.searchValue);
-    this.responseAxios(this.state.searchValue);
+    localStorage.setItem('searchValue', value);
+    responseAxios(value);
   };
 
-  async responseAxios(str: string) {
-    this.setState({
-      loading: true,
-    });
+  const responseAxios = async (str: string) => {
+    setIsLoading(true);
 
     const response = await AxiosApi.getAll(str).catch((error) => {
       console.error(error);
-      this.setState({
-        loading: false,
-      });
     });
-    this.setState({
-      data: response.results,
-      loading: false,
-    });
-    await console.log(this.state.data);
-  }
+    setData(response.results);
+    setIsLoading(false);
+  };
 
-  componentDidMount() {
-    this.responseAxios(this.state.searchValue);
-  }
+  return (
+    <>
+      <Header
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+        value={value}
+        loading={isLoading}
+        errorClick={errorMessage}
+      />
+      {isLoading ? <div></div> : <Main data={data} />}
+    </>
+  );
+};
 
-  render() {
-    return (
-      <>
-        <Header
-          handleChange={this.handleChange}
-          handleSubmit={this.handleSubmit}
-          value={this.state.searchValue}
-          loading={this.state.loading}
-          errorClick={this.errorMessage}
-        />
-        <Main sData={this.state.data} />
-      </>
-    );
-  }
-}
 export default SearchBar;

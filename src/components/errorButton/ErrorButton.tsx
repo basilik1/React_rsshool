@@ -1,14 +1,11 @@
-import React from 'react';
+import { FC } from 'react';
 
-class ErrorButton extends React.Component {
-  render(): React.ReactNode {
-    const { onClick } = this.props;
-    return (
-      <button type="button" onClick={onClick}>
-        Error
-      </button>
-    );
-  }
-}
+const ErrorButton: FC = ({ onClick }) => {
+  return (
+    <button type="button" onClick={onClick}>
+      Error
+    </button>
+  );
+};
 
 export default ErrorButton;
