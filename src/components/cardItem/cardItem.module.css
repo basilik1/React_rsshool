@@ -1,0 +1,35 @@
+.card_item {
+  padding: 50px 150px;
+  position: fixed;
+  
+}
+.card_info {
+
+
+  transition: all 0.3s ease-in-out;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #000000;
+  border-radius: 15px;
+  width: 250px;
+  padding: 25px;
+}
+.btn_close_item {
+  transition: all 0.3s ease-in-out;
+  position: absolute;
+  right: 15px;
+  padding: 5px;
+  top: 15px;
+}
+.btn_close_item:hover {
+  transform: rotate(90deg); 
+  
+}
+.title {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+.card_item span {
+  margin-bottom: 10px;
+}

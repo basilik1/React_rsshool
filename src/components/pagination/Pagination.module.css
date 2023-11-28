@@ -1,0 +1,25 @@
+.pagination {
+  display: flex;
+  margin-bottom: 25px;
+  gap: 5px;
+}
+
+
+.page_link {
+  border-radius: 10px;
+  padding: 0 10px; 
+  text-decoration: none;
+  color: black;
+  background-color:  rgb(240, 239, 239);
+}
+.page_link:hover {
+  color: black;
+  background-color:  rgb(175, 175, 175);
+}
+.page_link:active {
+  color: black;
+  background-color:  rgb(122, 121, 121);
+}
+.active_page_link {
+  background-color:  rgb(122, 121, 121);
+}

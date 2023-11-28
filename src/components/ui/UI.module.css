@@ -1,14 +1,19 @@
 .top_section {
   display: flex;
-  width: 100%;
-  align-items: center;
-  gap: 30px;
+  min-width: 950px;
+  flex-direction: column;
   margin-bottom: 20px;
 }
 .top_main {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
-  gap: 30px;
+  display: flex;
+  
+}
+.sidebar {
+  flex-direction: column;
+  border-right: 2px solid #000000;
+  width: 350px;
+  align-items: flex-start;
+  display: flex;
 }
 .form {
   padding: 10px;
@@ -27,7 +32,6 @@
 }
 .search {
   display: flex;
-  justify-content: center;
   gap: 50px;
   align-items: center;
 }
@@ -42,5 +46,31 @@
   border-radius: 20px;
   padding: 20px;
 }
+.list {
+  margin-left: 15px;
+  border-radius: 15px;
+  
+}
 
-
+.list a:hover {
+  color: black;
+}
+.list:hover {
+  background-color: rgb(211, 208, 208);
+}
+.list:active {
+  background-color:  rgb(175, 175, 175);
+}
+nav a {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-decoration: none;
+  color: inherit;
+}
+.block_card {
+  flex: 1;
+  position: relative;
+  
+}

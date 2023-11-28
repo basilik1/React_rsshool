@@ -1,36 +1,36 @@
 import styles from './UI.module.css';
-import Loader from '../loader/Loader.tsx';
 import ErrorButton from '../errorButton/ErrorButton.tsx';
 import { FC } from 'react';
+import SelectItemPage from '../selectItemPage/SelectItemPage.tsx';
 
 const Header: FC = ({
-  handleChange,
-  handleSubmit,
+  onChange,
   value,
-  loading,
   errorClick,
+  limitVaue,
+  onSelectChange,
+  onSubmit,
 }) => {
   return (
     <>
-      {loading ? (
-        <Loader />
-      ) : (
-        <section className={styles.top_section}>
-          <form className={styles.form}>
+      <section className={styles.top_section}>
+        <div className={styles.search}>
+          <form autoComplete="off" className={styles.form} onSubmit={onSubmit}>
             <input
               className={styles.input}
               placeholder="Search..."
               type="text"
               value={value}
-              onChange={handleChange}
+              onChange={onChange}
             ></input>
-            <button type="submit" onClick={handleSubmit}>
+            <button type="submit" className={styles}>
               Search
             </button>
           </form>
           <ErrorButton onClick={errorClick} />
-        </section>
-      )}
+        </div>
+        <SelectItemPage value={limitVaue} onChange={onSelectChange} />
+      </section>
     </>
   );
 };

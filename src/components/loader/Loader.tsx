@@ -1,9 +1,12 @@
-import React from 'react';
+import { FC } from 'react';
+import styles from './Loader.module.css';
 
-class Loader extends React.Component {
-  render() {
-    return <div className="loader">Loading...</div>;
-  }
-}
+const Loader: FC = () => {
+  return (
+    <div className={styles.loader}>
+      <div className={styles.loader_inner}></div>
+    </div>
+  );
+};
 
 export default Loader;
