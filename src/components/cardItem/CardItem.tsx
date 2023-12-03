@@ -1,15 +1,17 @@
-import { FC, useState, useEffect } from 'react';
-import styles from './cardItem.module.css';
+import { useState, useEffect } from 'react';
+import styles from './CardItem.module.css';
 import { IoMdClose } from 'react-icons/io';
+import { Idata } from '../interface/interface';
 
-const CardItem: FC = ({ data }) => {
+const CardItem = ({ data }: { data: Idata }) => {
   const [showCard, setShowCard] = useState(false);
-  const handleCloseCard = () => {
+  const handleCloseCard: React.MouseEventHandler<HTMLButtonElement> = () => {
     setShowCard(false);
   };
   useEffect(() => {
     data.name && setShowCard(true);
   }, [data.name]);
+
   return (
     <>
       {showCard ? (

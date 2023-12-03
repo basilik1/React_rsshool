@@ -1,13 +1,14 @@
-import styles from './UI.module.css';
-import { FC, useEffect, useState } from 'react';
-import Loader from '../loader/Loader.tsx';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { axiosPeople } from '../../api/Axios.api.tsx';
-import CardItem from '../cardItem/cardItem.tsx';
+import CardItem from '../cardItem/CardItem.tsx';
+import Loader from '../loader/Loader.tsx';
+import styles from './UI.module.css';
+import { IMainComponent } from '../interface/interface.ts';
 
-const Main: FC = ({ data, value, first }) => {
+const Main = ({ data, value, first }: IMainComponent) => {
   const { id } = useParams();
-  const pageNumber = first ? 0 : id ? id - 1 : 0;
+  const pageNumber = first ? 0 : id ? +id - 1 : 0;
   const infoForPage = data[pageNumber];
 
   const [peopleUrl, setPeopleUrl] = useState('');
@@ -44,8 +45,8 @@ const Main: FC = ({ data, value, first }) => {
         <nav>
           <ul>
             {infoForPage
-              .filter((obj) =>
-                obj.name.toLowerCase().includes(value.toLowerCase())
+              .filter(
+                (item) => item.name?.toLowerCase().includes(value.toLowerCase())
               )
               .map((item) => (
                 <li
@@ -60,7 +61,13 @@ const Main: FC = ({ data, value, first }) => {
         </nav>
       </div>
       <div className={styles.block_card}>
-        {loading ? <Loader /> : <CardItem data={peopleData} />}
+        {loading ? (
+          <div className={styles.loader}>
+            <Loader />
+          </div>
+        ) : (
+          <CardItem data={peopleData} />
+        )}
       </div>
     </section>
   );

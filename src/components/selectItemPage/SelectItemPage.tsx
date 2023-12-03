@@ -1,9 +1,8 @@
 import styles from './SelectItemPage.module.css';
-import { FC } from 'react';
-
+import { ISelectItemPage } from '../interface/interface';
 const options = [10, 20, 50, 100];
 
-const SelectItemPage: FC = ({ onChange, value }) => {
+const SelectItemPage = ({ onChange, value }: ISelectItemPage) => {
   return (
     <div className={styles.select_item}>
       <h3 style={{ marginRight: 25 }}>Number of elements per page</h3>

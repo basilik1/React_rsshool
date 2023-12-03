@@ -6,7 +6,6 @@
 }
 .top_main {
   display: flex;
-  
 }
 .sidebar {
   flex-direction: column;
@@ -36,8 +35,6 @@
   align-items: center;
 }
 
-
-
 .item {
   display: flex;
   flex-direction: column;
@@ -49,7 +46,6 @@
 .list {
   margin-left: 15px;
   border-radius: 15px;
-  
 }
 
 .list a:hover {
@@ -59,7 +55,7 @@
   background-color: rgb(211, 208, 208);
 }
 .list:active {
-  background-color:  rgb(175, 175, 175);
+  background-color: rgb(175, 175, 175);
 }
 nav a {
   padding: 10px;
@@ -72,5 +68,12 @@ nav a {
 .block_card {
   flex: 1;
   position: relative;
+}
+.loader {
+  position: fixed;
+  width: 25%;
+  padding: 100px 0;
+}
+.btn_search {
   
 }

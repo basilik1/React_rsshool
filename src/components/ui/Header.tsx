@@ -1,16 +1,16 @@
-import styles from './UI.module.css';
 import ErrorButton from '../errorButton/ErrorButton.tsx';
-import { FC } from 'react';
 import SelectItemPage from '../selectItemPage/SelectItemPage.tsx';
+import styles from './UI.module.css';
+import { IHeaderComponent } from '../interface/interface.ts';
 
-const Header: FC = ({
-  onChange,
+const Header = ({
+  limitValue,
   value,
+  onChange,
   errorClick,
-  limitVaue,
   onSelectChange,
   onSubmit,
-}) => {
+}: IHeaderComponent) => {
   return (
     <>
       <section className={styles.top_section}>
@@ -23,13 +23,13 @@ const Header: FC = ({
               value={value}
               onChange={onChange}
             ></input>
-            <button type="submit" className={styles}>
+            <button type="submit" className={styles.btn_search}>
               Search
             </button>
           </form>
           <ErrorButton onClick={errorClick} />
         </div>
-        <SelectItemPage value={limitVaue} onChange={onSelectChange} />
+        <SelectItemPage value={limitValue} onChange={onSelectChange} />
       </section>
     </>
   );

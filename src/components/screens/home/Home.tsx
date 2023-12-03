@@ -5,6 +5,7 @@ import Main from '../../ui/Main.tsx';
 import { Route, Routes, useNavigate } from 'react-router-dom';
 import Pagination from '../../pagination/Pagination.tsx';
 import Loader from '../../loader/Loader.tsx';
+import { Idata } from '../../interface/interface.ts';
 
 const Home: FC = () => {
   const savedSearchRequest = localStorage.getItem('searchRequest');
@@ -18,7 +19,7 @@ const Home: FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [initialLoad, setInitialLoad] = useState(true);
 
-  const [infoData, setInfoData] = useState([]);
+  const [infoData, setInfoData] = useState<Idata[]>([]);
 
   useEffect(() => {
     if (!initialLoad) {
@@ -36,7 +37,7 @@ const Home: FC = () => {
     }
   }, [selectedLimit, savedLimitRequest]);
 
-  const axiosResults = (searchTerm) => {
+  const axiosResults = (searchTerm: string) => {
     setIsLoading(true);
     localStorage.setItem('searchRequest', searchTerm);
     getAxiosAllPage(searchTerm)
@@ -53,15 +54,15 @@ const Home: FC = () => {
     throw new Error('Error message');
   };
 
-  const onSearchValue = (e) => {
+  const onSearchValue = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchValue(e.target.value);
     localStorage.setItem('valueInputSearch', e.target.value);
   };
-  const onSelectChange = (e) => {
+  const onSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedLimit(e.target.value);
     navigate('/');
   };
-  const onSearchSubmit = (e) => {
+  const onSearchSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setSearchRequest(searchValue);
     localStorage.setItem('valueInputSearch', '');
