@@ -6,6 +6,7 @@ import { Route, Routes, useNavigate } from 'react-router-dom';
 import Pagination from '../../pagination/Pagination.tsx';
 import Loader from '../../loader/Loader.tsx';
 import { Idata } from '../../interface/interface.ts';
+import { DataContext } from '../../context/DataContext';
 
 const Home: FC = () => {
   const savedSearchRequest = localStorage.getItem('searchRequest');
@@ -19,7 +20,7 @@ const Home: FC = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [initialLoad, setInitialLoad] = useState(true);
 
-  const [infoData, setInfoData] = useState<Idata[]>([]);
+  const [infoData, setInfoData] = useState<Idata[][]>([]);
 
   useEffect(() => {
     if (!initialLoad) {
@@ -71,38 +72,45 @@ const Home: FC = () => {
 
   return (
     <>
-      {isLoading ? (
-        <Loader />
-      ) : (
-        <>
-          <Header
-            onChange={onSearchValue}
-            onSubmit={onSearchSubmit}
-            onSelectChange={onSelectChange}
-            value={searchValue}
-            errorClick={errorMessage}
-            limitValue={selectedLimit}
-          />
-          {infoData.length > 0 ? (
-            <Routes>
-              <Route path="/" element={<Pagination data={infoData} />}>
-                <Route
-                  index
-                  element={<Main data={infoData} first value={valueInput} />}
-                />
-                <Route
-                  path="page/:id"
-                  element={
-                    <Main data={infoData} first={false} value={valueInput} />
-                  }
-                ></Route>
-              </Route>
-            </Routes>
-          ) : (
-            <h2 className="no_result">No results</h2>
-          )}
-        </>
-      )}
+      <DataContext.Provider value={{ infoData, searchRequest }}>
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <>
+            <Header
+              onChange={onSearchValue}
+              onSubmit={onSearchSubmit}
+              onSelectChange={onSelectChange}
+              value={searchValue}
+              errorClick={errorMessage}
+              limitValue={selectedLimit}
+            />
+            {infoData.length > 0 ? (
+              <Routes>
+                <Route path="/" element={<Pagination />}>
+                  <Route
+                    index
+                    element={
+                      <Main first value={valueInput ? valueInput : ''} />
+                    }
+                  />
+                  <Route
+                    path="page/:id"
+                    element={
+                      <Main
+                        first={false}
+                        value={valueInput ? valueInput : ''}
+                      />
+                    }
+                  ></Route>
+                </Route>
+              </Routes>
+            ) : (
+              <h2 className="no_result">No results</h2>
+            )}
+          </>
+        )}
+      </DataContext.Provider>
     </>
   );
 };

@@ -4,12 +4,16 @@ import { axiosPeople } from '../../api/Axios.api.tsx';
 import CardItem from '../cardItem/CardItem.tsx';
 import Loader from '../loader/Loader.tsx';
 import styles from './UI.module.css';
-import { IMainComponent } from '../interface/interface.ts';
+import { IMainComponent, Idata } from '../interface/interface.ts';
+import { useContext } from 'react';
+import { DataContext } from '../context/DataContext.tsx';
 
-const Main = ({ data, value, first }: IMainComponent) => {
+const Main = ({ value, first }: IMainComponent) => {
+  const { infoData } = useContext(DataContext);
+
   const { id } = useParams();
   const pageNumber = first ? 0 : id ? +id - 1 : 0;
-  const infoForPage = data[pageNumber];
+  const infoForPage: Idata[] = infoData[pageNumber];
 
   const [peopleUrl, setPeopleUrl] = useState('');
   const [loading, setLoading] = useState(false);

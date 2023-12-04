@@ -11,8 +11,7 @@ export interface IErrorButton {
 }
 
 export interface IMainComponent {
-  data: Idata[];
-  value: string | null;
+  value: string;
   first: boolean;
 }
 export interface IHeaderComponent {
@@ -29,4 +28,8 @@ export interface ISelectItemPage {
 }
 export interface IPagination {
   data: Idata[];
+}
+export interface IDataContext {
+  infoData: Idata[][];
+  searchRequest: string;
 }

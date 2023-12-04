@@ -1,13 +1,16 @@
 import styles from './Pagination.module.css';
 import { NavLink, Outlet } from 'react-router-dom';
-import { IPagination } from '../interface/interface';
+import { DataContext } from '../context/DataContext';
+import { useContext } from 'react';
 
-const Pagination = ({ data }: IPagination) => {
+const Pagination = () => {
+  const { infoData } = useContext(DataContext);
+
   return (
     <section id="main-section">
       <div className={styles.pagination}>
         <h3>Number of pages</h3>
-        {data.map((_, index: number) => (
+        {infoData.map((_, index: number) => (
           <NavLink
             to={`/page/${index + 1}`}
             className={({ isActive }) =>
