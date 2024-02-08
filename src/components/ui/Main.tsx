@@ -1,12 +1,13 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom';
+
 import { axiosPeople } from '../../api/Axios.api.tsx';
 import CardItem from '../cardItem/CardItem.tsx';
 import Loader from '../loader/Loader.tsx';
-import styles from './UI.module.css';
-import { IMainComponent, Idata } from '../interface/interface.ts';
-import { useContext } from 'react';
 import { DataContext } from '../context/DataContext.tsx';
+
+import { IMainComponent, Idata } from '../interface/interface.ts';
+import styles from './UI.module.css';
 
 const Main = ({ value, first }: IMainComponent) => {
   const { infoData } = useContext(DataContext);

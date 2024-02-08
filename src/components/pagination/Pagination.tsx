@@ -19,6 +19,7 @@ const Pagination = () => {
                 : `${styles.page_link}`
             }
             key={`page-${index + 1}`}
+            data-testid={`pageTestid`}
           >
             {index + 1}
           </NavLink>

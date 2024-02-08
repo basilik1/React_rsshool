@@ -1,8 +1,8 @@
 import { useEffect, useState, FC } from 'react';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import { chunkArray, getAxiosAllPage } from '../../../api/Axios.api.tsx';
 import Header from '../../ui/Header.tsx';
 import Main from '../../ui/Main.tsx';
-import { Route, Routes, useNavigate } from 'react-router-dom';
 import Pagination from '../../pagination/Pagination.tsx';
 import Loader from '../../loader/Loader.tsx';
 import { Idata } from '../../interface/interface.ts';

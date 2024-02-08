@@ -15,9 +15,13 @@ const CardItem = ({ data }: { data: Idata }) => {
   return (
     <>
       {showCard ? (
-        <div className={styles.card_item}>
+        <div data-testId="cardItem" className={styles.card_item}>
           <div className={styles.card_info}>
-            <button className={styles.btn_close_item} onClick={handleCloseCard}>
+            <button
+              data-testId="closeBtn"
+              className={styles.btn_close_item}
+              onClick={handleCloseCard}
+            >
               <IoMdClose />
             </button>
             <h3 className={styles.title}>{data.name}</h3>
