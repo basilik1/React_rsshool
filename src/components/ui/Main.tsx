@@ -1,20 +1,21 @@
-import { useEffect, useState, useContext } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
-import { axiosPeople } from '../../api/Axios.api.tsx';
+import { cardItem } from '../../utils/cardItem.tsx';
 import CardItem from '../cardItem/CardItem.tsx';
 import Loader from '../loader/Loader.tsx';
-import { DataContext } from '../context/DataContext.tsx';
 
 import { IMainComponent, Idata } from '../interface/interface.ts';
 import styles from './UI.module.css';
+import { filter } from '../../redux/slices/filterSlice.tsx';
+import { useSelector } from 'react-redux';
 
 const Main = ({ value, first }: IMainComponent) => {
-  const { infoData } = useContext(DataContext);
+  const { items } = useSelector(filter);
 
   const { id } = useParams();
   const pageNumber = first ? 0 : id ? +id - 1 : 0;
-  const infoForPage: Idata[] = infoData[pageNumber];
+  const infoForPage: Idata[] = items[pageNumber];
 
   const [peopleUrl, setPeopleUrl] = useState('');
   const [loading, setLoading] = useState(false);
@@ -22,7 +23,7 @@ const Main = ({ value, first }: IMainComponent) => {
 
   const handleGetCardInfo = (peopleUrl: string) => {
     setLoading(true);
-    axiosPeople(peopleUrl)
+    cardItem(peopleUrl)
       .then((results) => {
         setPeopleData(results);
         setLoading(false);
@@ -35,6 +36,7 @@ const Main = ({ value, first }: IMainComponent) => {
 
   const handleClickListItem = (itemUrl: string) => {
     setLoading(true);
+
     setPeopleUrl(itemUrl);
   };
 
@@ -57,7 +59,10 @@ const Main = ({ value, first }: IMainComponent) => {
                 <li
                   className={styles.list}
                   key={crypto.randomUUID()}
-                  onClick={() => item.url && handleClickListItem(item.url)}
+                  onClick={(e) =>
+                    (item.url && handleClickListItem(item.url)) ||
+                    e.preventDefault()
+                  }
                 >
                   <a href="#">{item.name}</a>
                 </li>

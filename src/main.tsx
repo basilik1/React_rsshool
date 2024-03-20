@@ -1,16 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import Home from './components/screens/home/Home.tsx';
-import './assets/styles/global.css';
-import ErrorBoundary from './components/errorBoundary/ErrorBoundary';
+import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
+import './assets/styles/global.css';
+import App from './App';
+// import ErrorBoundary from './components/errorBoundary/ErrorBoundary';
+import { store } from './redux/store';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <ErrorBoundary fallback={<p>Something went wrong</p>}>
-      <BrowserRouter>
-        <Home />
-      </BrowserRouter>
-    </ErrorBoundary>
+    {/* <ErrorBoundary fallback={<p>Something went wrong</p>}> */}
+    <BrowserRouter>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </BrowserRouter>
+    {/* </ErrorBoundary> */}
   </React.StrictMode>
 );

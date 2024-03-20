@@ -19,17 +19,14 @@ export interface IHeaderComponent {
   errorClick: () => void;
   onSelectChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   onSubmit: (e: React.FormEvent<HTMLFormElement>) => void;
-  value: string;
   limitValue: string;
 }
 export interface ISelectItemPage {
   onChange: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-  value: string;
 }
 export interface IPagination {
   data: Idata[];
 }
 export interface IDataContext {
-  infoData: Idata[][];
   searchRequest: string;
 }

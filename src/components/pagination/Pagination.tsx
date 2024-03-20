@@ -1,16 +1,17 @@
 import styles from './Pagination.module.css';
 import { NavLink, Outlet } from 'react-router-dom';
-import { DataContext } from '../context/DataContext';
-import { useContext } from 'react';
+
+import { filter } from '../../redux/slices/filterSlice';
+import { useSelector } from 'react-redux';
 
 const Pagination = () => {
-  const { infoData } = useContext(DataContext);
+  const { items } = useSelector(filter);
 
   return (
     <section id="main-section">
       <div className={styles.pagination}>
         <h3>Number of pages</h3>
-        {infoData.map((_, index: number) => (
+        {items.map((_, index: number) => (
           <NavLink
             to={`/page/${index + 1}`}
             className={({ isActive }) =>

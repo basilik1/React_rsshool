@@ -37,8 +37,8 @@ describe('CardItem', () => {
   });
   it('render close button and closing card', async () => {
     render(<CardItem data={mockData} />);
-    const closeBtn = screen.getByTestId('closeBtn');
-    const cardItem = screen.getByTestId('cardItem');
+    const closeBtn = screen.getByTestid('closeBtn');
+    const cardItem = screen.getByTestid('cardItem');
     expect(closeBtn).toBeInTheDocument();
     userEvent.hover(closeBtn);
     userEvent.click(closeBtn);
